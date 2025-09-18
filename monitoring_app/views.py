@@ -91,24 +91,25 @@ class HeartRateDataListCreateView(generics.ListCreateAPIView):
     serializer_class = HeartRateDataSerializer
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    filterset_fields = ['device']
+    filterset_fields = ['device', 'patient']
     ordering_fields = ['recorded_at', 'created_at', 'heart_rate']
     ordering = ['-recorded_at']
     
     def get_queryset(self):
         user = self.request.user
-        patient_profile = getattr(user, 'patient_profile', None)
-        if user.is_authenticated and patient_profile is not None:
-            return HeartRateData.objects.filter(patient=patient_profile)
-        elif user.is_authenticated and (user.is_staff or user.is_superuser):
+        if hasattr(user, 'patient_profile'):
+            return HeartRateData.objects.filter(patient=user.patient_profile)
+        elif user.is_staff or user.is_superuser:
             return HeartRateData.objects.all()
         return HeartRateData.objects.none()
     
     def perform_create(self, serializer):
-        try:
-            patient = Patient.objects.get(user=self.request.user)
-            serializer.save(patient=patient)
-        except Patient.DoesNotExist:
+        # If user is a patient, automatically associate with their profile
+        if hasattr(self.request.user, 'patient_profile'):
+            serializer.save(patient=self.request.user.patient_profile)
+        else:
+            # For staff/admin users, require patient to be specified in the request
+            # The serializer validation will handle the required patient field
             serializer.save()
 
 class PatientHeartRateStatsView(generics.GenericAPIView):

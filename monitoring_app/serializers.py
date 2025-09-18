@@ -92,13 +92,25 @@ class HeartRateDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = HeartRateData
         fields = ('id', 'device', 'patient', 'heart_rate', 'recorded_at', 'created_at')
-        read_only_fields = ('patient', 'created_at')
+        read_only_fields = ('created_at',)  # Only created_at is always read-only
     
     def validate(self, attrs):
+        request = self.context['request']
+        user = request.user
+        
+        # For patient users, automatically set patient to their own profile
+        if hasattr(user, 'patient_profile'):
+            attrs['patient'] = user.patient_profile
+        
+        # Validate device ownership for patients
         device = attrs.get('device')
-        patient = self.context['request'].user.patient_profile if hasattr(self.context['request'].user, 'patient_profile') else None
+        patient = attrs.get('patient')
         
         if device and patient and device.patient != patient:
             raise serializers.ValidationError({"device": "This device does not belong to the patient."})
+        
+        # For staff/admin users, require patient field if not already set
+        if not hasattr(user, 'patient_profile') and 'patient' not in attrs:
+            raise serializers.ValidationError({"patient": "This field is required for staff/admin users."})
         
         return attrs

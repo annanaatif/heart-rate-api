@@ -76,31 +76,25 @@ Server will start at:
 
 ------------------------------------------------------------------------
 
-🔗 API Endpoints
+## 🔗 API Endpoints
 
-  -------------------------------------------------------------------------------------------
-  Endpoint                               Method           Purpose            Access
-  -------------------------------------- ---------------- ------------------ ----------------
-  /api/auth/register/                    POST             Register a new     Public
-                                                          user               
-
-  /api/auth/login/                       POST             Login and get      Public
-                                                          token              
-
-  /api/patients/                         GET              List all patients  Staff/Admin
-
-  /api/patients/                         POST             Create a new       Admin
-                                                          patient            
-
-  /api/heart-rate/                       GET              List heart rate    Patient (own) /
-                                                          data               Staff / Admin
-
-  /api/heart-rate/                       POST             Submit heart rate  Patient (own) /
-                                                          data               Admin
-
-  /api/patients/<id>/heart-rate-stats/   GET              Get heart rate     Patient (own),
-                                                          statistics         Staff, Admin
-  -------------------------------------------------------------------------------------------
+| Endpoint                                | Method | Purpose                    | Access                          |
+|-----------------------------------------|--------|----------------------------|---------------------------------|
+| `/api/auth/register/`                   | POST   | Register a new user        | Public                          |
+| `/api/auth/login/`                      | POST   | Login and get token        | Public                          |
+| `/api/patients/`                        | GET    | List all patients          | Staff / Admin                   |
+| `/api/patients/`                        | POST   | Create a new patient       | Admin                           |
+| `/api/patients/<id>/`                   | GET    | Retrieve patient details   | Staff / Admin / Patient (own)   |
+| `/api/patients/<id>/`                   | PUT    | Update patient details     | Admin                           |
+| `/api/patients/<id>/`                   | DELETE | Delete a patient           | Admin                           |
+| `/api/heart-rate/`                      | GET    | List heart rate data       | Patient (own) / Staff / Admin   |
+| `/api/heart-rate/`                      | POST   | Submit heart rate data     | Patient (own) / Admin           |
+| `/api/patients/<id>/heart-rate-stats/`  | GET    | Get heart rate statistics  | Patient (own) / Staff / Admin   |
+| `/api/devices/`                         | GET    | List all devices           | Staff / Admin                   |
+| `/api/devices/`                         | POST   | Register new device        | Admin                           |
+| `/api/devices/<id>/`                    | GET    | Retrieve device details    | Staff / Admin                   |
+| `/api/devices/<id>/`                    | PUT    | Update device info         | Admin                           |
+| `/api/devices/<id>/`                    | DELETE | Remove a device            | Admin                           |
 
 ------------------------------------------------------------------------
 
@@ -142,11 +136,11 @@ REST Framework Settings (in settings.py)
 📊 Data Flow
 
 1.  Device records patient’s heart rate.
-2.  API Client sends POST request with data.
+2.  API Client sends a POST request with data.
 3.  Serializer validates data & links it to patient/device.
 4.  View checks role-based permissions.
 5.  Model saves valid data to DB.
-6.  Response returns JSON with result.
+6.  Response returns JSON with the result.
 
 ------------------------------------------------------------------------
 
@@ -179,7 +173,7 @@ import directly into Postman.
 👨‍💻 Tech Stack
 
 -   Backend: Django, Django REST Framework
--   Database: SQLite (default), PostgreSQL (production ready)
+-   Database: SQLite (default), PostgreSQL (production-ready)
 -   Auth: DRF Token Authentication
 -   Testing: Django TestCase & DRF APITestCase
 -   Deployment: Gunicorn / Nginx / Docker (optional)

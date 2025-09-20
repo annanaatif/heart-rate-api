@@ -1,0 +1,427 @@
+{
+	"info": {
+		"_postman_id": "947b8fe6-abed-4c82-b6e5-d8309a17f006",
+		"name": "patient-heart-rate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45761829",
+		"_collection_link": "https://annan16.postman.co/workspace/Annan16's-Workspace~ee14333f-1f21-4ece-8f55-58888602b24e/collection/45761829-947b8fe6-abed-4c82-b6e5-d8309a17f006?action=share&source=collection_link&creator=45761829"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"aatif\",\n    \"email\": \"aatif@email.com\",\n    \"password\": \"passaetf123\",\n    \"password2\": \"passaetf123\",\n    \"first_name\": \"Aatif\",\n    \"last_name\": \"Annan\",\n    \"user_type\": \"admin\",\n    \"phone_number\": \"+1324576890\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/auth/register/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"annan\",\n    \"password\": \"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/auth/login/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create patients",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 38080998607996f2deac5b9d0d3571fe64a5e049",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"patient3\",\n    \"email\": \"patient3@example.com\",\n    \"first_name\": \"Jane\",\n    \"last_name\": \"Frost\",\n    \"phone_number\": \"+1324576893\",\n    \"date_of_birth\": \"1995-05-03\",\n    \"gender\": \"F\",\n    \"address\": \"321 Main St, City, State\",\n    \"emergency_contact\": \"Chris Frost +0976853412\",\n    \"medical_history\": \"No significant medical history\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/patients/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"patients",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list patients",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token db8e7832abb0a8ce13357953b1d3849250159c71",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/patients/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"patients",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create devices",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token db8e7832abb0a8ce13357953b1d3849250159c71",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"device_id\": \"HRM-002\",\n    \"patient\": 2,\n    \"status\": \"active\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/devices/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"devices",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list devices",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token db8e7832abb0a8ce13357953b1d3849250159c71",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/devices/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"devices",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create heart rate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token db8e7832abb0a8ce13357953b1d3849250159c71",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"device\": 1,\n    \"patient\": 1,  // REQUIRED for admin/staff\n    \"heart_rate\": 72,\n    \"recorded_at\": \"2025-09-15T10:30:00Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/heart-rate/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"heart-rate",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list heart stats",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token db8e7832abb0a8ce13357953b1d3849250159c71",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/patients/{{patient_id}}/heart-rate-stats/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"patients",
+						"{{patient_id}}",
+						"heart-rate-stats",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list patient",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token db8e7832abb0a8ce13357953b1d3849250159c71",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/patients/3/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"patients",
+						"3",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update patient",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token db8e7832abb0a8ce13357953b1d3849250159c71",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3,\n    \"username\": \"JaneFrost3\",\n    \"email\": \"JaneFrost3@email.com\",\n    \"first_name\": \"Jane\",\n    \"last_name\": \"Frost\",\n    \"phone_number\": \"+1324576893\",\n    \"date_of_birth\": \"1995-05-03\",\n    \"gender\": \"F\",\n    \"address\": \"321 Main St, City, State\",\n    \"emergency_contact\": \"Chris Frost +0976853412\",\n    \"medical_history\": \"No significant medical history\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/patients/3/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"patients",
+						"3",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list device",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token db8e7832abb0a8ce13357953b1d3849250159c71",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/devices/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"devices",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update device",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token db8e7832abb0a8ce13357953b1d3849250159c71",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3,\n    \"device_id\": \"HRM-002\",\n    \"status\": \"active\",\n    \"registered_at\": \"2025-09-20T05:24:45.937844Z\",\n    \"last_activity\": null,\n    \"patient\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/devices/2/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"devices",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete device",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token db8e7832abb0a8ce13357953b1d3849250159c71",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/devices/2/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"devices",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete patient",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token db8e7832abb0a8ce13357953b1d3849250159c71",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/patients/2/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"patients",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
